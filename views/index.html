@@ -1,0 +1,121 @@
+<!-- Author: Aayush Jha | Website: https://heyayyus.in -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page || heyayyus.in</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+      <div class="square" style="--i: 0"></div>
+      <div class="square" style="--i: 1"></div>
+      <div class="square" style="--i: 2"></div>
+      <div class="square" style="--i: 3"></div>
+      <div class="square" style="--i: 4"></div>
+      <div class="square" style="--i: 5"></div>
+
+      <div class="background">
+        <div class="wrapper">
+
+          <!-- Login Form -->
+          <div class="form-wrapper sign-in">
+            <form action="/login" method="POST">
+              <h2>Login</h2>
+              <div class="input-group">
+                <input type="email" name="email" required />
+                <label for="">Email</label>
+              </div>
+              <div class="input-group">
+                <input type="password" name="password" required />
+                <label for="">Password</label>
+              </div>
+              <div class="remember">
+                <label><input type="checkbox" /> Remember me</label>
+              </div>
+              <button type="submit">Send OTP</button>
+              <div class="signUp-link">
+                <p>
+                  Don't have an account?
+                  <a href="#" class="signUpBtn-link">Sign Up</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Sign Up Form -->
+          <div class="form-wrapper sign-up">
+            <form action="/register" method="POST">
+              <h2>Sign Up</h2>
+              <div class="input-group">
+                <input type="text" name="name" required />
+                <label for="">Username</label>
+              </div>
+              <div class="input-group">
+                <input type="email" name="email" required />
+                <label for="">Email</label>
+              </div>
+              <div class="input-group">
+                <input type="password" name="password" required />
+                <label for="">Password</label>
+              </div>
+              <div class="remember">
+                <label><input type="checkbox" /> I agree to the terms</label>
+              </div>
+              <button type="submit">Sign Up</button>
+              <div class="signUp-link">
+                <p>
+                  Already have an account?
+                  <a href="#" class="signInBtn-link">Sign In</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- OTP Verification Form -->
+          <div class="form-wrapper otp-verify" style="display: none;">
+            <form action="/verify-otp" method="POST">
+              <h2>Enter OTP</h2>
+              <div class="input-group">
+                <input type="text" name="otp" required />
+                <label for="">6-Digit OTP</label>
+              </div>
+              <input type="hidden" name="email" id="otpEmail" />
+              <button type="submit">Verify OTP</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const signInBtnLink = document.querySelector(".signInBtn-link");
+    const signUpBtnLink = document.querySelector(".signUpBtn-link");
+    const wrapper = document.querySelector(".wrapper");
+
+    signUpBtnLink.addEventListener("click", () => {
+      wrapper.classList.add("active");
+    });
+
+    signInBtnLink.addEventListener("click", () => {
+      wrapper.classList.remove("active");
+    });
+
+    // Show OTP form after login
+    document.querySelector("form[action='/login']").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = this.email.value;
+      document.querySelector(".sign-in").style.display = "none";
+      document.querySelector(".otp-verify").style.display = "flex";
+      document.getElementById("otpEmail").value = email;
+    });
+  </script>
+</body>
+</html>
